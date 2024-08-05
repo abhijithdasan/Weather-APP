@@ -96,16 +96,16 @@ const Weather = () => {
                     <div className='weather-data'>
                         <div className='weather-item'>
                             <img src={humidity_icon} alt='Humidity Icon' className='icon' />
-                            <div className=''>
+                            <div>
                                 <p>{weatherData.humidity}%</p>
-                                <span className=''>Humidity</span>
+                                <span>Humidity</span>
                             </div>
                         </div>
                         <div className='weather-item'>
                             <img src={wind_icon} alt='Wind Icon' className='icon' />
-                            <div className=''>
+                            <div>
                                 <p>{weatherData.windSpeed} Km/Hr</p>
-                                <span className=''>Wind Speed</span>
+                                <span>Wind Speed</span>
                             </div>
                         </div>
                     </div>
