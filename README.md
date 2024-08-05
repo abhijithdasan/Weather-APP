@@ -16,7 +16,7 @@ Check out the live demo of the application: [MarxWeather](https://marxweather.ve
 
 ## Screenshots
 
-![Weather App Screenshot](screenshot.png)
+![Weather App Screenshot](./Screenshot/screenshot.png)
 
 ## Getting Started
 
