@@ -14,6 +14,7 @@ import humidity_icon from '../assets/humidity.png';
 const Weather = () => {
     const inputRef = useRef();
     const [weatherData, setWeatherData] = useState(null);
+    const [alertMessage, setAlertMessage] = useState("");
     const allIcons = {
         "01d": sun_icon,
         "01n": sun_icon,
@@ -33,7 +34,7 @@ const Weather = () => {
 
     const search = async (city) => {
         if (city === "") {
-            alert('Enter a city name');
+            setAlertMessage('Please enter a city name');
             return;
         }
         try {
@@ -41,7 +42,7 @@ const Weather = () => {
             const response = await fetch(url);
             const data = await response.json();
             if (data.cod !== 200) {
-                alert(data.message);
+                setAlertMessage(data.message);
                 return;
             }
             console.log(data);
@@ -53,8 +54,10 @@ const Weather = () => {
                 location: data.name,
                 icon: icon
             });
+            setAlertMessage("");
         } catch (err) {
             setWeatherData(null);
+            setAlertMessage("Error fetching weather data. Please try again.");
             console.error("Error fetching weather data:", err);
         }
     };
@@ -63,13 +66,27 @@ const Weather = () => {
         search('London');
     }, []);
 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            search(inputRef.current.value);
+        }
+    };
+
     return (
         <div className='weather'>
-            <h1>Weather</h1>
             <div className='search-bar'>
-                <input ref={inputRef} type="text" placeholder='Search' />
+                <input ref={inputRef} type="text" placeholder='Search' onKeyPress={handleKeyPress} />
                 <FontAwesomeIcon icon={faSearch} className='faSearch' onClick={() => search(inputRef.current.value)} />
             </div>
+
+            {alertMessage && (
+                <div className="alert-overlay">
+                    <div className="alert-popup">
+                        <p>{alertMessage}</p>
+                        <button onClick={() => setAlertMessage("")}>Close</button>
+                    </div>
+                </div>
+            )}
 
             {weatherData ? (
                 <>
@@ -94,7 +111,7 @@ const Weather = () => {
                     </div>
                 </>
             ) : (
-                <p>No weather data available. Please search for a city.</p>
+                <p className="no-data-message">No weather data available. Please search for a city.</p>
             )}
         </div>
     );
