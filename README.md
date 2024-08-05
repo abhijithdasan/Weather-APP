@@ -30,7 +30,7 @@ Follow these instructions to set up the project on your local machine for develo
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/weather-app.git
+    git clone https://github.com/abhijithdasane/weather-app.git
     ```
 
 2. Navigate to the project directory:
